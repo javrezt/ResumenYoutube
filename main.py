@@ -6,8 +6,7 @@ import os
 st.header('Desplegando asistente para extraer insights artículos')
 
 # Campo para recibir una consulta
-query = st.text_area(
-    'Ingresa tu consulta y la información que quieres procesar:')
+query = st.text_area('Ingresa tu consulta y la información que quieres procesar:')
 
 # Input de selección múltiple para escoger el lenguaje
 language = st.selectbox('Seleccione el lenguaje', ('ENGLISH', 'SPANISH'))
@@ -34,15 +33,15 @@ if st.button('Consultar'):
         "response_mode": "blocking",
         "user": "CRDZ-LS-11"
     }
+
     # Realizar la petición POST
     response = requests.post(f'{base_url}{path}', json=data, headers=headers)
 
     # Mostrar la respuesta de la API
     if response.status_code == 200:
         st.success('Consulta enviada con éxito!')
-        st.json(response.json())
+        #st.json(response.json())
         result = response.json()
-        # print(result['answer'])
         st.markdown('### Resultado de la solicitud:')
         st.markdown(result['answer'])
     else:
